@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Automobile Diagnosing System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#6a5acd">
+    <link rel="icon" href="images/sunblaze-logo.png" type="image/x-icon">
+    <meta name="description" content="Free online consultant and other services">
+    <meta name="keywords" content="home,consulant,lifestyle,lessons,computer,phone,mobile,website,application,development">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+</head>
+
+<body>
+    <div id="theWholeToolCont">
+        <header id="toolHeader">
+            <h1>Automobile Diagnosing Sytem</h1>
+            <div class="nav-menu-container" onclick="navMenuFunction(this)">
+                <div class="nav-menu-bar1"></div>
+                <div class="nav-menu-bar2"></div>
+                <div class="nav-menu-bar3"></div>
+            </div>
+        </header>
+        <div id="theWholeTool" class="container-fluid">
+            <div class="row">
+                <div id="nav-left" class="col-sm-2">
+                    <ul id="nav-left-lists" class="nav nav-pills nav-stacked nav-fixed">
+                        <li class="active"><a data-toggle="pill" href="#home">Home</a></li>
+                        <li><a data-toggle="pill" href="#addFaultTab">Add a Fault Analysis</a></li>
+                        <li><a data-toggle="pill" href="#aboutTab">About</a></li>
+                    </ul>
+                    <div id="loginCont">
+                        <div id="loginContainer">
+                            <input type="text" class="form-control input-sm" id="loginUsernameVal" style="margin-bottom:12px" placeholder="Username" required>
+                            <input type="password" class="form-control input-sm" id="loginPasswordVal" placeholder="Enter password" required>
+                            <div id="loginHelpContainer">
+                                <span id="loginHelpInfo">The log in combination is wrong</span></div>
+                            <button id="loginButtonElement" type="submit" class="btn btn-default" onclick="log_in();">Log In</button>
+                        </div>
+                        <div>
+                            <button id="logoutBtn" type="button" class="btn btn-large btn-warning" onclick="log_out();">Log Out</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="display-right" class="col-md-10">
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active">
+                            <header>
+                                <h3>HOME</h3>
+                                <h5 style="text-align: center;">This software helps other keep log and look for solution to faults with automobile</h5>
+                            </header>
+                            <content id="faults-container" class="row">
+
+                            </content>
+                            <div id="a_Fault">
+                                <header>
+                                    <h4 class="heading">The Look out of a fault in the faults of the fault software in the home<span class="close-diag close-diag2" onclick="hide_a_fault()">&times;</span></h4>
+                                </header>
+                                <section class="description">
+                                    This would be the description of the fault, as in this one would be the first one of the faults, you can try to write an epistle here if you love to, the basic thing is that it won't work, I don't mean my work won't work, of course everyone wants his
+                                    work to work, because no one wants to waste his work.
+                                </section>
+                                <section class="symptoms">
+                                    <h4>Symptoms</h4>
+                                    <ul class="col-sm-11 col-sm-offset-1">
+                                        <li><span class="symptom">Testing: </span>Another</li>
+                                        <li><span class="symptom">Testing More: </span>Another</li>
+                                        <li><span class="symptom">Test: </span>T</li>
+                                    </ul>
+                                </section>
+                                <section class="publishInfo">This fault was added <span class="date">about a day ago</span> by <span class="author">Opeyemi David</span></section>
+                            </div>
+                        </div>
+                        <div id="addFaultTab" class="tab-pane fade">
+                            <header>
+                                <h3 style="text-align:center;">Add a Fault</h3>
+                            </header>
+                            <p>Please fill in the form below carefully.</p>
+                            <form id="addFaultForm" method="post" action="php/scripts.php">
+                                <label for="heading">Heading:</label><input type="text" name="heading" required max="200">
+                                <div class="row">
+                                    <p class="col-sm-3">Description:</p>
+                                    <div class="col-sm-9">
+                                        <textarea name="description" rows="5" cols="100%" required placeholder="Description of the fault. E.g. When you turn the keys to start the car, the kick starter will roll (making the sound as if it will start), but the engine will not start up..."></textarea></div>
+                                    <input type="hidden" name="formID" value="addFault">
+                                </div>
+                                <div id="sympCont">
+                                    <h4>Symptoms</h4>
+                                    <label for="sympIn">Add Symptom(s):</label>
+                                    <div id="sympCon">
+                                        <div id="sympInC"><input type="text" id="sympIn" onkeyup="filterOptions(this, 'availSymp')" placeholder="Search for Symptoms..."><span class="close-diag" onclick="closeDiag(this, 'availSymp')">&times;</span></div>
+                                        <div id="availSymp">
+                                        </div>
+                                        <button id="nSympM" onclick="document.getElementById('nSympCont').style.display = 'block';">Create a Symptom</button>
+                                    </div>
+                                    <div id="chkdSympCont">
+                                        <h4>Selected Symptoms:</h4>
+                                        <ol id="chkdSymp">
+                                            No Solution has been selected yet.
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div id="solnCont">
+                                    <h4>Solutions</h4>
+                                    <label for="solnIn">Add Solution(s):</label>
+                                    <div id="solnCon">
+                                        <div id="solnInC"><input type="text" id="solnIn" onkeyup="filterOptions(this, 'availSoln')" placeholder="Search for Solutions..."><span class="close-diag" onclick="closeDiag(this, 'availSoln')">&times;</span></div>
+                                        <div id="availSoln">
+                                        </div>
+                                        <button id="nSolnM" onclick="document.getElementById('nSolnCont').style.display = 'block';">Create a Solution</button>
+                                    </div>
+                                    <div id="chkdSolnCont">
+                                        <h4>Selected Solutions:</h4>
+                                        <ol id="chkdSoln">
+                                            No Solution has been selected yet.
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="col-sm-3">Author:</p>
+                                    <div class="col-sm-9">
+                                        <input name="author" type="text" required maxlength="50" style="width: 100%;" placeholder="Your full name (for reference purpose)"></div>
+                                </div>
+                                <p><input type="checkbox" name="checkboxU">I have reviewed my inputs and I'm sure they are correct.</p>
+                                <input id="addFaultBtn" type="submit" value="Submit Fault">
+                                <div class="loader"></div>
+                                <p id="addFaultFormInfo"></p>
+                            </form>
+
+                            <div id="nSympCont" class="moda">
+                                <form id="nSympForm" name="nSympForm" method="post" action="php/scripts.php" class="moda-content"><span class="close-diag close-diag2" onclick="closeDiag(this, 'nSympCont')">&times;</span>
+                                    <h3 class="moda-h">CREATE A SYMPTOM</h3>
+                                    <p>Fill this form to create a new symptom. But, so as to prevent duplicate or irrelevant symptoms, we strongly recommend you make sure the symptom has not been created</p>
+                                    <input type="hidden" name="formID" value="nSymp">
+                                    <label for="heading">Heading:</label>
+                                    <input name="heading" type="text" required maxlength="50" placeholder="A short name for the symptom. E.g. Car won't start...">
+                                    <label for="description">Description:</label>
+                                    <textarea name="description" rows="5" cols="75%" required placeholder="Description of the symptom. E.g. When you turn the keys to start the car, the kick starter will roll (making the sound as if it will start), but the engine will not start up..."></textarea>
+                                    <label for="author">Your Name:</label>
+                                    <input name="author" type="text" required maxlength="50" placeholder="Your full name (for reference purpose)">
+                                    <input id="nSympBtn" type="submit" value="Submit Symptom">
+                                    <div class="loader"></div>
+                                    <p id="nSympFormInfo"></p>
+                                </form>
+                            </div>
+
+                            <div id="nSolnCont" class="moda">
+                                <form id="nSolnForm" name="nSolnForm" method="post" action="php/scripts.php" class="moda-content"><span class="close-diag close-diag2" onclick="closeDiag(this, 'nSolnCont')">&times;</span>
+                                    <h3 class="moda-h">CREATE A SOLUTION</h3>
+                                    <p>Fill this form to create a new solution. But, so as to prevent duplicate or irrelevant solutions, we strongly recommend you make sure the solution has not been created</p>
+                                    <input type="hidden" name="formID" value="nSoln">
+                                    <label for="heading">Heading:</label>
+                                    <input name="heading" type="text" required maxlength="50" placeholder="A short name for the solution. E.g. Check your battery...">
+                                    <label for="description">Description:</label>
+                                    <textarea name="description" rows="5" cols="75%" required placeholder="Description of the solution. E.g. Check the dashboard to see if the battery indicator is bright as it should be..."></textarea>
+                                    <label for="author">Your Name:</label>
+                                    <input name="author" type="text" required maxlength="50" placeholder="Your full name (for reference purpose)">
+                                    <input id="nSolnBtn" type="submit" value="Submit Solution">
+                                    <div class="loader"></div>
+                                    <p id="nSolnFormInfo"></p>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="aboutTab" class="tab-pane fade">
+                            <header>
+                                <h3 style="text-align:center;">About</h3>
+                            </header>
+                            <div class="row">
+                                <p class="col-xs-3 col-sm-2">Name: </p>
+                                <p id="courtesyName" class="col-xs-9 col-sm-10">Ojo Oluwatobilola Hannah</p>
+                            </div>
+                            <div class="row">
+                                <p class="col-xs-3 col-sm-2">Matric No: </p>
+                                <p id="courtesyMatric" class="col-xs-9 col-sm-10">HND/14/COM/PT/008</p>
+                            </div>
+                            <div class="row">
+                                <p class="col-xs-3 col-sm-2">Supervised by: </p>
+                                <p id="courtesyMatric" class="col-xs-9 col-sm-10"><b>Dr Olagunju</b></p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        <footer id="page-footer">
+            <p id="footer-copyright">&#169; Sunblaze Cooperation</p>
+        </footer>
+    </div>
+    <script>
+        (function() {
+            $("#nav-left-lists a[href='#addFaultTab'").hide();
+            $("#logoutBtn").hide();
+        }());
+    </script>
+</body>
+
+</html>
